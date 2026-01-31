@@ -1,20 +1,29 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnemyDetection : MonoBehaviour
 {
     [SerializeField] private int viewLevel = 0;
     [SerializeField] private int viewRange = 10;
     [SerializeField] private LayerMask plalienLayer;
+    [SerializeField] private LayerMask memyselfandILayer;
     [SerializeField] private LayerMask bodyLayer;
     public GameObject _player;
     [SerializeField] private float detectionTime = 3;
+    [SerializeField] private GameObject rayPoint;
     private bool _isSpotting = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _player = PlayerDetection.Instance.gameObject;
         StartCoroutine(CheckAround());
+    }
+
+    private void FixedUpdate()
+    {
+        Debug.DrawRay(rayPoint.transform.position, (_player.transform.position - rayPoint.transform.position), Color.yellow);
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward), Color.green);
     }
 
     // Update is called once per frame
@@ -87,12 +96,12 @@ public class EnemyDetection : MonoBehaviour
     {
         if (viewLevel >= PlayerDetection.Instance.currentMaskLevel || PlayerDetection.Instance.currentMaskVoided)
         {
-            Vector2 forward = transform.TransformDirection(Vector2.up);
-            Vector2 toOther = Vector2.Normalize(PlayerDetection.Instance.transform.position - transform.position);
-            if (Vector2.Dot(forward, toOther) > 0.3f)
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            Vector3 toOther = Vector3.Normalize(_player.transform.position - transform.position);
+            if (Vector3.Dot(forward, toOther) > 0.3f)
             {
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, (_player.transform.position - transform.position), viewRange);
-                if (hit && hit.collider.gameObject == _player)
+                RaycastHit2D hit = Physics2D.Raycast(rayPoint.transform.position, (_player.transform.position - rayPoint.transform.position), viewRange, ~memyselfandILayer);
+                if(hit && hit.collider.gameObject == _player.gameObject)
                 {
                     return true;
                 }
@@ -103,18 +112,18 @@ public class EnemyDetection : MonoBehaviour
 
     private void SeesBody()
     {
-        Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, 10);
+        Collider2D[] cols = Physics2D.OverlapCircleAll(rayPoint.transform.position, 10);
         for(int i = 0; i < cols.Length; i++)
         {
             if (cols[i].gameObject.name == "Body")
             {
                 print("We have a body!");
-                Vector2 forward = transform.TransformDirection(Vector2.up);
-                Vector2 toOther = Vector2.Normalize(cols[i].transform.position - transform.position);
+                Vector2 forward = rayPoint.transform.TransformDirection(Vector2.up);
+                Vector2 toOther = Vector2.Normalize(cols[i].transform.position - rayPoint.transform.position);
                 if (Vector2.Dot(forward, toOther) > 0.3f)
                 {
                     print("In ma damn vision!");
-                    RaycastHit2D hit = Physics2D.Raycast(transform.position, (cols[i].transform.position - transform.position), viewRange);
+                    RaycastHit2D hit = Physics2D.Raycast(rayPoint.transform.position, (cols[i].transform.position - rayPoint.transform.position), viewRange, ~memyselfandILayer);
                     if (hit && hit.collider.gameObject == cols[i].gameObject)
                     {
                         if(_player.GetComponent<PlayerDetection>().faceCurrentBody == cols[i].gameObject)
@@ -122,10 +131,6 @@ public class EnemyDetection : MonoBehaviour
                             _player.GetComponent<PlayerDetection>().currentMaskVoided = true;
                         }
                         print("Bro lied");
-                    }
-                    if (hit)
-                    {
-                        print(hit.collider.gameObject.name + " and also " + cols[i].gameObject);
                     }
                 }
             }
