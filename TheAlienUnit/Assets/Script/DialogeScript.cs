@@ -44,9 +44,9 @@ public class DialogeScript : MonoBehaviour
     void Update()
     {
         //This is mainly for testing, you can press L to start some dialoge
-#if UNITY_EDITOR
         var keyboard = Keyboard.current;
         if (keyboard == null) return;
+#if UNITY_EDITOR
         if (keyboard.lKey.wasPressedThisFrame)
         {
             StartDialoge(testDialoges, 0);
@@ -55,19 +55,10 @@ public class DialogeScript : MonoBehaviour
         if (inDialoge)
         {
             //if the player goes to the next part and they dont have to answer a question
-            if (keyboard.numpadPlusKey.wasPressedThisFrame && currentTextDialoges[currentDiaIndex].hasQuestion == false)
-            {
-                KillSound();
-                //continue or end dialoge
-                if (!currentTextDialoges[currentDiaIndex].isEnd)
-                {
-                    WriteDialoge(currentTextDialoges[currentDiaIndex].nextDiaIfNotQuestion, currentTextDialoges);
-                }
-                else
-                {
-                    StopDialoge();
-                }
-            }
+            //if (keyboard.numpadPlusKey.wasPressedThisFrame && currentTextDialoges[currentDiaIndex].hasQuestion == false)
+            //{
+            //    NextDia();
+            //}
         }
     }
 
@@ -88,6 +79,12 @@ public class DialogeScript : MonoBehaviour
 
         //calls the events
         currentDia.startDialogEvent.Invoke();
+
+        //make sound play
+        if (currentDia.playsSound)
+        {
+            spawnedSources.Add(Soundsystem.PlaySound(currentDia.clip));
+        }
 
         currentDiaIndex = index;
         //Names things broken for if they break (no way)
@@ -126,12 +123,6 @@ public class DialogeScript : MonoBehaviour
                 optionButtons[i].GetComponent<Button>().onClick.AddListener(() => WriteDialoge(moveTo, dialoges));
             }
         }
-
-        //make sound play
-        if (currentDia.playsSound)
-        {
-            spawnedSources.Add(Soundsystem.PlaySound(currentDia.clip));
-        }
         currentTextDialoges = dialoges;
     }
     public void StopDialoge()
@@ -152,6 +143,31 @@ public class DialogeScript : MonoBehaviour
         {
             Destroy(spawnedSources[i]);
         }
+    }
+
+    public static void StartDialoge(List<dialoge> dia)
+    {
+        instance.StartDialoge(dia, 0);
+    }
+
+    public void NextDia()
+    {
+        if(!currentTextDialoges[currentDiaIndex].hasQuestion == false) { return; }
+        KillSound();
+        //continue or end dialoge
+        if (!currentTextDialoges[currentDiaIndex].isEnd)
+        {
+            WriteDialoge(currentTextDialoges[currentDiaIndex].nextDiaIfNotQuestion, currentTextDialoges);
+        }
+        else
+        {
+            StopDialoge();
+        }
+    }
+
+    public static void NextDial()
+    {
+        instance.NextDia();
     }
 }
 

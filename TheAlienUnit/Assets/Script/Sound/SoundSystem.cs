@@ -77,7 +77,7 @@ public class Soundsystem : MonoBehaviour
         }
         else
         {
-            Destroy(_currentSource, _source.clip.length);
+            Destroy(_currentSource, _source.clip.length + 1);
         }
 
         _source.Play();
