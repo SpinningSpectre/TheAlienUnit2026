@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    private List<Interactable> interactablesInArea = new List<Interactable>();
+    public List<Interactable> interactablesInArea = new List<Interactable>();
 
     // Update is called once per frame
     void Update()
@@ -27,7 +27,7 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.GetComponent<Interactable>())
         {

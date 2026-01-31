@@ -5,6 +5,7 @@ public class ObjectiveScript : MonoBehaviour
 {
     public static ObjectiveScript Instance;
     [SerializeField] private TMP_Text textBox;
+    public int amountOfCodes = 0;
 
     private void Start()
     {

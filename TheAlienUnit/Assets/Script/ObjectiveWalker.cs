@@ -7,7 +7,7 @@ public class ObjectiveWalker : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (beenTrigged) return;
-        if(collision.gameObject.layer == 8)
+        if(collision.gameObject.layer == 8 && ObjectiveScript.Instance.amountOfCodes == 2)
         {
             beenTrigged = true;
             ObjectiveScript.UpdateObjective(text);
