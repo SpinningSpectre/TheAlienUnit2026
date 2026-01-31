@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyDetection : MonoBehaviour
@@ -6,6 +7,8 @@ public class EnemyDetection : MonoBehaviour
     [SerializeField] private int viewRange = 10;
     [SerializeField] private LayerMask plalienLayer;
     public GameObject _player;
+    [SerializeField] private float detectionTime = 3;
+    private bool _isSpotting = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -14,6 +17,41 @@ public class EnemyDetection : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        if (SeesPlayer() && !_isSpotting)
+        {
+            StartCoroutine(StartDetection());
+        }
+    }
+
+    public IEnumerator StartDetection()
+    {
+        print("huh?");
+        //do ex clam
+        _isSpotting = true;
+        yield return new WaitForSeconds((detectionTime / 3) * 1.5f);
+        if(SeesPlayer() )
+        {
+            StartCoroutine(CloseDetection());
+        }
+    }
+
+    public IEnumerator CloseDetection()
+    {
+        print("erm excuse me wha");
+        yield return new WaitForSeconds((detectionTime / 3) * 1.5f);
+        if(SeesPlayer() )
+        {
+            Detect();
+        }
+    }
+
+    public void Detect()
+    {
+        print("KILL YOURSELF");
+    }
+
+    private bool SeesPlayer()
     {
         if (viewLevel >= PlayerDetection.Instance.currentMaskLevel && !PlayerDetection.Instance.currentMaskVoided)
         {
@@ -24,9 +62,10 @@ public class EnemyDetection : MonoBehaviour
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, (_player.transform.position - transform.position), viewRange);
                 if (hit && hit.collider.gameObject == _player)
                 {
-                    print("I FUCKING HATE YOUUUUUUUUUUU");
+                    return true;
                 }
             }
         }
+        return false;
     }
 }
