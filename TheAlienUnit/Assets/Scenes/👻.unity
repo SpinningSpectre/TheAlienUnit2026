@@ -3873,6 +3873,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f225eeee92b3984b9e9176efdd7ae6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
+--- !u!114 &1343604514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343604496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0969518c98a5ea24b9741c56b58fdc33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDetection
+  currentMaskLevel: 0
 --- !u!1 &1374744751
 GameObject:
   m_ObjectHideFlags: 0
@@ -5213,6 +5226,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 586366050205578381, guid: ed41e7ee7f0dd8649ba9ce339a3a4ca0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1343604509}
+    - targetCorrespondingSourceObject: {fileID: 586366050205578381, guid: ed41e7ee7f0dd8649ba9ce339a3a4ca0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1343604514}
   m_SourcePrefab: {fileID: 100100000, guid: ed41e7ee7f0dd8649ba9ce339a3a4ca0, type: 3}
 --- !u!1 &1849974321
 GameObject:
@@ -5816,6 +5832,7 @@ GameObject:
   - component: {fileID: 2033544161}
   - component: {fileID: 2033544160}
   - component: {fileID: 2033544163}
+  - component: {fileID: 2033544164}
   m_Layer: 0
   m_Name: Mask
   m_TagString: Untagged
@@ -5970,6 +5987,31 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2033544164}
+        m_TargetAssemblyTypeName: Mask, Assembly-CSharp
+        m_MethodName: GrabMask
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2033544164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033544159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 964c7b6adf7f38846844e172b537d457, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Mask
+  maskLevel: 1
 --- !u!1 &2068133669
 GameObject:
   m_ObjectHideFlags: 0
