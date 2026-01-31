@@ -44,9 +44,9 @@ public class DialogeScript : MonoBehaviour
     void Update()
     {
         //This is mainly for testing, you can press L to start some dialoge
-#if UNITY_EDITOR
         var keyboard = Keyboard.current;
         if (keyboard == null) return;
+#if UNITY_EDITOR
         if (keyboard.lKey.wasPressedThisFrame)
         {
             StartDialoge(testDialoges, 0);
