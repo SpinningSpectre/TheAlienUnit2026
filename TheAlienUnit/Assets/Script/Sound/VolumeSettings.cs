@@ -1,0 +1,17 @@
+using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.UI;
+public class VolumeSettings : MonoBehaviour
+{
+    [Header("Audio Mixer")]
+    [SerializeField] private AudioMixer _audioMixer;
+
+    [Header("Volume Sliders")]
+    [SerializeField] private Slider _mainVolumeSlider;
+    public void SetMainVolume()
+    {
+        float volume = _mainVolumeSlider.value;
+        _audioMixer.SetFloat("Master", Mathf.Log10(volume) * 20);
+    }
+
+}
