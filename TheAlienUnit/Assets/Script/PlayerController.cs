@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -33,7 +34,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform cam;
     [SerializeField] private Sprite tempMomBeam;
     [SerializeField] private LayerMask enemyLayer;
+    private bool switchCooldown = false;
 
+    [SerializeField] private List<dialoge> momCallDialoge = new List<dialoge>();
+    [SerializeField] private AudioClip momCallSound;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
@@ -88,7 +92,7 @@ public class PlayerController : MonoBehaviour
 
     private void ChangeMomState()
     {
-        if (hasMommed) { return; }
+        if (hasMommed || switchCooldown) { return; }
         if (isUrMom)
         {
             _rb = GetComponent<Rigidbody2D>();
@@ -97,6 +101,12 @@ public class PlayerController : MonoBehaviour
             cam.transform.position = transform.position;
             cam.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y, -10);
             Destroy(currentMom);
+            StartCoroutine(MomSwitchCooldown());
+            DialogeScript.NextDial();
+            DialogeScript.NextDial();
+            DialogeScript.NextDial();
+            DialogeScript.NextDial();
+
             return;
         }
         currentMom = Instantiate(momBeam, transform.position, transform.rotation);
@@ -106,10 +116,21 @@ public class PlayerController : MonoBehaviour
         cam.transform.position = currentMom.transform.position;
         cam.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y, -10);
         isUrMom = true;
+        Soundsystem.PlaySound(momCallSound);
+        DialogeScript.StartDialoge(momCallDialoge);
+        StartCoroutine(MomSwitchCooldown());
+    }
+
+    private IEnumerator MomSwitchCooldown()
+    {
+        switchCooldown = true;
+        yield return new WaitForSeconds(0.5f);
+        switchCooldown = false;
     }
 
     private IEnumerator MomAttack()
     {
+        DialogeScript.NextDial();
         currentMom.GetComponent<SpriteRenderer>().sprite = tempMomBeam;
         Collider2D[] colls = Physics2D.OverlapCircleAll(currentMom.transform.position, currentMom.transform.localScale.x, enemyLayer);
         for (int i = 0; i < colls.Length; i++)
@@ -119,9 +140,10 @@ public class PlayerController : MonoBehaviour
         canMove = false;
         yield return new WaitForSeconds(1.5f);
 
+        DialogeScript.NextDial();
         canMove = true;
         ChangeMomState();
-        //hasMommed = true;
+        hasMommed = true;
     }
 
     public void Blob(InputAction.CallbackContext context)
