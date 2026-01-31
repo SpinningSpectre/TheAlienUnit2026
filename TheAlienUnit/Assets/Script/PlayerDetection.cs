@@ -4,6 +4,10 @@ public class PlayerDetection : MonoBehaviour
 {
     public static PlayerDetection Instance;
     public int currentMaskLevel = 0;
+    public Sprite[] maskSkinLevels;
+    public Sprite[] maskMiscLevels;
+    public GameObject maskSkinVisual;
+    public GameObject maskMiscVisual;
     public GameObject faceCurrentBody;
     public bool currentMaskVoided = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -12,9 +16,21 @@ public class PlayerDetection : MonoBehaviour
         Instance = this;
     }
 
-    public static void SetMaskLevel(int level)
+    public static void SetMaskLevel(int level,Color maskColor)
     {
-        Instance.currentMaskLevel = level;
-        Instance.currentMaskVoided = false;
+        Instance.SetMask(level,maskColor);
+    }
+
+    public void SetMask(int level, Color maskColor)
+    {
+        currentMaskLevel = level;
+        currentMaskVoided = false;
+        maskSkinVisual.SetActive(level != 0);
+        maskMiscVisual.SetActive(level != 0);
+
+        if(level == 0) { return; }
+        maskSkinVisual.GetComponent<SpriteRenderer>().sprite = maskSkinLevels[level - 1];
+        maskMiscVisual.GetComponent<SpriteRenderer>().sprite = maskMiscLevels[level - 1];
+        maskSkinVisual.GetComponent<SpriteRenderer>().color = maskColor;
     }
 }
