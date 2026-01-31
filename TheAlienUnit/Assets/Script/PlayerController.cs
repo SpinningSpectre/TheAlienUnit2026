@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float blobSpeed;
     [SerializeField] private float interactDistance;
     [SerializeField] private float interactRadius;
+    [SerializeField] private float WhistleRadius;
     
     private Vector2 _moveInput;
     private bool _isBlobbing;
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private InputAction _blob;
     private InputAction _reset;
     private InputAction _move;
+    private InputAction _whistle;
     
     [Header("Unity Events")]
     public UnityEvent onBlobStart;
@@ -50,6 +52,7 @@ public class PlayerController : MonoBehaviour
        
        _blob = InputSystem.actions.FindAction("Blob");
        _reset = InputSystem.actions.FindAction("Reset");
+       _whistle = InputSystem.actions.FindAction("Whistle");
     }
 
     // Update is called once per frame
@@ -200,6 +203,20 @@ public class PlayerController : MonoBehaviour
             if (col.TryGetComponent(out IInteractable interactable))
             {
                 interactable.Interact();
+            }
+        }
+    }
+    
+    public void Whistle(InputAction.CallbackContext context)
+    {
+        
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, WhistleRadius);
+        foreach (var col in colliders)
+        {
+            if (col.TryGetComponent(out Npc npc))
+            {
+                npc.noisePos = transform.position;
+                Debug.Log(npc.noisePos);
             }
         }
     }
