@@ -5,7 +5,6 @@ using UnityEngine.Events;
 public class Npc : MonoBehaviour, IInteractable
 {
     public bool isAlive { get; private set; }
-    public 
     
     
     [Header("Unity Events")]
