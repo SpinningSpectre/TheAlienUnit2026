@@ -12,21 +12,23 @@ public class PlayerController : MonoBehaviour
     
     private Vector2 _moveInput;
     private bool _isBlobbing;
+    
     private Rigidbody2D _rb;
-
+    private Animator _anim;
+    
     private InputAction _blob;
     private InputAction _reset;
     
     [Header("Unity Events")]
     public UnityEvent onBlobStart;
     public UnityEvent onBlobEnd;
-
-
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
        _rb = GetComponent<Rigidbody2D>(); 
+       _anim = GetComponent<Animator>();
+       
        _blob = InputSystem.actions.FindAction("Blob");
        _reset = InputSystem.actions.FindAction("Reset");
     }
@@ -48,6 +50,19 @@ public class PlayerController : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();
+        _anim.SetBool("isWalking", true);
+        
+
+        if (context.canceled)
+        {
+            _anim.SetBool("isWalking", false);
+            _anim.SetFloat("LastInputX", _moveInput.x);
+            _anim.SetFloat("LastInputY", _moveInput.y);
+        }
+        
+        _anim.SetFloat("InputX", _moveInput.x);
+        _anim.SetFloat("InputY", _moveInput.y);
+        
     }
 
     public void Blob(InputAction.CallbackContext context)
@@ -83,14 +98,4 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.cyan;
-
-        Vector3 center = transform.position + transform.forward * interactDistance;
-
-        Gizmos.DrawWireSphere(center, interactRadius);
-    }
-
 }
