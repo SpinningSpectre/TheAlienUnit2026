@@ -15,5 +15,6 @@ public class PlayerDetection : MonoBehaviour
     public static void SetMaskLevel(int level)
     {
         Instance.currentMaskLevel = level;
+        Instance.currentMaskVoided = false;
     }
 }

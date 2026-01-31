@@ -100,12 +100,6 @@ public class DialogeScript : MonoBehaviour
         voiceImage.sprite = currentDia.voiceImage;
         dialogeText.text = text;
 
-        //turn off all buttons
-        foreach (Button button in optionButtons)
-        {
-            button.gameObject.SetActive(false);
-        }
-
         //turn them back on with settings if the question needs it
         if (currentDia.hasQuestion)
         {

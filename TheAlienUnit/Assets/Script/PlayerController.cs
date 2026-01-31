@@ -141,14 +141,17 @@ public class PlayerController : MonoBehaviour
         cam.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y, -10);
         isUrMom = true;
         Soundsystem.PlaySound(momCallSound);
-        DialogeScript.StartDialoge(momCallDialoge);
-        StartCoroutine(MomSwitchCooldown());
+        StartCoroutine(MomSwitchCooldown(true));
     }
 
-    private IEnumerator MomSwitchCooldown()
+    private IEnumerator MomSwitchCooldown(bool call = false)
     {
         switchCooldown = true;
         yield return new WaitForSeconds(0.5f);
+        if (call)
+        {
+            DialogeScript.StartDialoge(momCallDialoge);
+        }
         switchCooldown = false;
     }
 
