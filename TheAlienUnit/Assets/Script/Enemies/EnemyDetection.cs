@@ -29,20 +29,45 @@ public class EnemyDetection : MonoBehaviour
         print("huh?");
         //do ex clam
         _isSpotting = true;
-        yield return new WaitForSeconds((detectionTime / 3) * 1.5f);
-        if(SeesPlayer() )
+        for (int i = 0; i < 10; i++)
+        {
+            yield return new WaitForSeconds((detectionTime / 30) * 1.5f);
+            if (!SeesPlayer())
+            {
+                _isSpotting = false;
+                yield break;
+            }
+        }
+        if (SeesPlayer() )
         {
             StartCoroutine(CloseDetection());
+        }
+        else
+        {
+            _isSpotting = false;
         }
     }
 
     public IEnumerator CloseDetection()
     {
         print("erm excuse me wha");
-        yield return new WaitForSeconds((detectionTime / 3) * 1.5f);
+
+        for(int i = 0; i < 10; i++)
+        {
+            yield return new WaitForSeconds((detectionTime / 30) * 1.5f);
+            if (!SeesPlayer())
+            {
+                _isSpotting = false;
+                yield break;
+            }
+        }
         if(SeesPlayer() )
         {
             Detect();
+        }
+        else
+        {
+            _isSpotting=false;
         }
     }
 
