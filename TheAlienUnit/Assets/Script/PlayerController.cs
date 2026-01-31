@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -9,12 +7,15 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float blobSpeed;
+    [SerializeField] private float interactDistance;
+    [SerializeField] private float interactRadius;
     
     private Vector2 _moveInput;
     private bool _isBlobbing;
     public Rigidbody2D _rb;
+    private Animator _anim;
     private bool canMove = true;
-
+    
     private InputAction _blob;
     private InputAction _reset;
     private InputAction _move;
@@ -38,13 +39,18 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private List<dialoge> momCallDialoge = new List<dialoge>();
     [SerializeField] private AudioClip momCallSound;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
-        _blob = InputSystem.actions.FindAction("Blob");
-        _reset = InputSystem.actions.FindAction("Reset");
+       _rb = GetComponent<Rigidbody2D>(); 
+       _anim = GetComponent<Animator>();
+       
+       _blob = InputSystem.actions.FindAction("Blob");
+       _reset = InputSystem.actions.FindAction("Reset");
     }
 
+    // Update is called once per frame
     private void Update()
     {
         var keyboard = Keyboard.current;
@@ -82,12 +88,25 @@ public class PlayerController : MonoBehaviour
         float currentSpeed = _isBlobbing ? blobSpeed : speed;
         currentSpeed = isUrMom ? momSpeed : currentSpeed;
         
-        _rb.linearVelocity = input * (currentSpeed * (canMove ? 1 : 0));
+        _rb.linearVelocity = input * currentSpeed;
     }
 
     public void Move(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();
+        _anim.SetBool("isWalking", true);
+        
+
+        if (context.canceled)
+        {
+            _anim.SetBool("isWalking", false);
+            _anim.SetFloat("LastInputX", _moveInput.x);
+            _anim.SetFloat("LastInputY", _moveInput.y);
+        }
+        
+        _anim.SetFloat("InputX", _moveInput.x);
+        _anim.SetFloat("InputY", _moveInput.y);
+        
     }
 
     private void ChangeMomState()
@@ -164,5 +183,19 @@ public class PlayerController : MonoBehaviour
     public void Reset(InputAction.CallbackContext context)
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void Interact(InputAction.CallbackContext context)
+    {
+        Vector2 center = transform.position + transform.forward * interactDistance;
+        
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(center, interactRadius);
+        foreach (var col in colliders)
+        {
+            if (col.TryGetComponent(out IInteractable interactable))
+            {
+                interactable.Interact();
+            }
+        }
     }
 }
