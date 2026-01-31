@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 
 public class Npc : MonoBehaviour, IInteractable
@@ -8,16 +9,18 @@ public class Npc : MonoBehaviour, IInteractable
     
     [Header("Unity Events")]
     public UnityEvent die;
+    private NavMeshAgent _agent;
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
-        
+        _agent = GetComponent<NavMeshAgent>();
+        isAlive = true;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
     }
