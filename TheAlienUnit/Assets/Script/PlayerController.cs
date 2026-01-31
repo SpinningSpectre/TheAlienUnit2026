@@ -197,24 +197,25 @@ public class PlayerController : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(center, interactRadius);
         foreach (var col in colliders)
         {
-            if (col.TryGetComponent(out IInteractable interactable))
-            {
-                interactable.Interact();
-            }
+            var interactable = col.GetComponentInParent<IInteractable>();
+            interactable?.Interact();
         }
     }
     
     public void Whistle(InputAction.CallbackContext context)
     {
-        
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, WhistleRadius);
+
         foreach (var col in colliders)
         {
-            if (col.TryGetComponent(out Npc npc))
+            Debug.Log(col.name);
+
+            var npc = col.GetComponentInParent<Npc>();
+            if (npc != null)
             {
                 npc.noisePos = transform.position;
-                Debug.Log(npc.noisePos);
             }
         }
+
     }
 }
