@@ -204,15 +204,16 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    public void whistle(InputAction.CallbackContext context)
+    public void Whistle(InputAction.CallbackContext context)
     {
         
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, WhistleRadius);
         foreach (var col in colliders)
         {
-            if (col.TryGetComponent(out IInteractable interactable))
+            if (col.TryGetComponent(out Npc npc))
             {
-                interactable.Interact();
+                npc.noisePos = transform.position;
+                Debug.Log(npc.noisePos);
             }
         }
     }

@@ -273,6 +273,7 @@ MonoBehaviour:
   blobSpeed: 9
   interactDistance: 0
   interactRadius: 1
+  WhistleRadius: 10
   _rb: {fileID: 2865063649870754827}
   onBlobStart:
     m_PersistentCalls:
