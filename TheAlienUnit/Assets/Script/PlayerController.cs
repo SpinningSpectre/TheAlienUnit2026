@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float blobSpeed;
+    [SerializeField] private float interactDistance;
+    [SerializeField] private float interactRadius;
     
     private Vector2 _moveInput;
     private bool _isBlobbing;
@@ -67,4 +69,28 @@ public class PlayerController : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    public void Interact(InputAction.CallbackContext context)
+    {
+        Vector2 center = transform.position + transform.forward * interactDistance;
+        
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(center, interactRadius);
+        foreach (var col in colliders)
+        {
+            if (col.TryGetComponent(out IInteractable interactable))
+            {
+                interactable.Interact();
+            }
+        }
+    }
+    
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+
+        Vector3 center = transform.position + transform.forward * interactDistance;
+
+        Gizmos.DrawWireSphere(center, interactRadius);
+    }
+
 }
