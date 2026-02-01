@@ -47,6 +47,7 @@ public class EnemyDetection : MonoBehaviour
     {
         print("Wha??");
         if (smallVisualObject) { smallVisualObject.SetActive(true); }
+        smallVisualObject.GetComponent<SpriteRenderer>().color = Color.white;
 
         //do ex clam
         _isSpotting = true;
@@ -57,6 +58,7 @@ public class EnemyDetection : MonoBehaviour
             {
                 print("nvm");
                 _isSpotting = false;
+                smallVisualObject.SetActive(false);
                 yield break;
             }
         }
@@ -75,12 +77,15 @@ public class EnemyDetection : MonoBehaviour
     {
         print("erm excuse me wha");
 
+        smallVisualObject.GetComponent<SpriteRenderer>().color = Color.red;
+
         for(int i = 0; i < 10; i++)
         {
             yield return new WaitForSeconds((detectionTime / 30) * 1.5f);
             if (!SeesPlayer())
             {
                 _isSpotting = false;
+                smallVisualObject.SetActive(false);
                 yield break;
             }
         }
@@ -97,6 +102,7 @@ public class EnemyDetection : MonoBehaviour
 
     public void Detect()
     {
+        smallVisualObject.GetComponent<SpriteRenderer>().color = Color.blue;
         print("KILL YOURSELF");
     }
 
