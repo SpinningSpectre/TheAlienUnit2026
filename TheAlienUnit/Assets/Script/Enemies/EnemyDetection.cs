@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static UnityEngine.GraphicsBuffer;
 
 public class EnemyDetection : MonoBehaviour
@@ -103,6 +104,7 @@ public class EnemyDetection : MonoBehaviour
     public void Detect()
     {
         smallVisualObject.GetComponent<SpriteRenderer>().color = Color.blue;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         print("KILL YOURSELF");
     }
 
