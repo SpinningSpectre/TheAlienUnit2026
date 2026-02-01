@@ -40,10 +40,10 @@ public class Npc : MonoBehaviour, IInteractable
     {
         if (!isAlive) return;
         
-        Vector3 direction = (_agent.destination - transform.position).normalized;
-        _anim.SetFloat("InputX", direction.x);
-        _anim.SetFloat("InputY", direction.y);
-        _anim.SetBool("isWalking", direction.magnitude > 0f);
+        // Vector3 direction = (_agent.destination - transform.position).normalized;
+        // _anim.SetFloat("InputX", direction.x);
+        // _anim.SetFloat("InputY", direction.y);
+        // _anim.SetBool("isWalking", direction.magnitude > 0f);
         
         if (noisePos == Vector2.zero && !_isSearching)
         {
