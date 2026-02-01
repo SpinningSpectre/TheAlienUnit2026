@@ -25,6 +25,15 @@ public class Npc : MonoBehaviour, IInteractable
     private bool _isSearching = false;
     public Color npcColor;
 
+    [Header("Mask")]
+    public GameObject maskPrefab;
+    public int maskLevel;
+    public Sprite maskSprite;
+    public Sprite maskSpriteLayer2;
+
+    [SerializeField] private GameObject rayPoint;
+    [SerializeField] private GameObject visualPoint;
+
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -114,6 +123,11 @@ public class Npc : MonoBehaviour, IInteractable
     {
         isAlive = false;
         _agent.isStopped = true;
+        Mask mas = Instantiate(maskPrefab, rayPoint.transform.position, visualPoint.transform.rotation).GetComponent<Mask>();
+        mas.maskColor = npcColor;
+        GetComponent<EnemyDetection>().enabled = false;
+        mas.GetComponent<SpriteRenderer>().sprite = maskSprite;
+        mas.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = maskSpriteLayer2;
         die?.Invoke();
     }
 
