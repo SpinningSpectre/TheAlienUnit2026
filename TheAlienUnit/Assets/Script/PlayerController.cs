@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private InputAction _move;
     private InputAction _whistle;
     private InputAction _mom;
+    private InputAction _maskState;
     
     [Header("Unity Events")]
     public UnityEvent onBlobStart;
@@ -64,6 +65,7 @@ public class PlayerController : MonoBehaviour
        _reset = InputSystem.actions.FindAction("Reset");
        _whistle = InputSystem.actions.FindAction("Whistle");
        _mom = InputSystem.actions.FindAction("Mom");
+       _maskState = InputSystem.actions.FindAction("MaskState");
     }
 
     // Update is called once per frame
@@ -71,20 +73,20 @@ public class PlayerController : MonoBehaviour
     {
         
 
-        /*if(isUrMom && keyboard.numpadEnterKey.wasPressedThisFrame)
-        {
-            StartCoroutine(MomAttack());
-        }
+         /*if(isUrMom && keyboard.numpadEnterKey.wasPressedThisFrame)
+         {
+             StartCoroutine(MomAttack());
+         }
 
-        if ((keyboard.numpadDivideKey.wasPressedThisFrame))
-        {
-            ChangeMaskState();
-        }
+         if ((keyboard.numpadDivideKey.wasPressedThisFrame))
+         {
+             ChangeMaskState();
+         }
 
-        if (isUrMask && keyboard.numpad0Key.wasPressedThisFrame)
-        {
-            MaskAttack();
-        }*/
+         if (isUrMask && keyboard.numpad0Key.wasPressedThisFrame)
+         {
+             MaskAttack();
+         }*/
     }
     // Update is called once per frame
     private void FixedUpdate()
@@ -215,7 +217,15 @@ public class PlayerController : MonoBehaviour
         _moveInput = Vector2.zero;
         StartCoroutine(MomSwitchCooldown(true));
     }
-    private void ChangeMaskState()
+
+    public void ChangeMaskStateInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            ChangeMaskState();
+        }
+    }
+    public void ChangeMaskState()
     {
         if (switchCooldown || isUrMom) { return; }
         if (isUrMask)
@@ -285,6 +295,14 @@ public class PlayerController : MonoBehaviour
         canMove = true;
         ChangeMomState();
         hasMommed = true;
+    }
+
+    public void MaskAttackInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            MaskAttack();
+        }
     }
     private void MaskAttack()
     {
