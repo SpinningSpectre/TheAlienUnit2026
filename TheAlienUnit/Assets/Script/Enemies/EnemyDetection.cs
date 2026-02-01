@@ -104,7 +104,7 @@ public class EnemyDetection : MonoBehaviour
     public void Detect()
     {
         smallVisualObject.GetComponent<SpriteRenderer>().color = Color.blue;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         print("KILL YOURSELF");
     }
 
