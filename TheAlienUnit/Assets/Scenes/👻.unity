@@ -4842,6 +4842,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1518262321}
   m_CullTransparentMesh: 1
+--- !u!1 &1567525639 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2590526189479671007, guid: cca8aedef7862154280f1df2938eff1c, type: 3}
+  m_PrefabInstance: {fileID: 5144386916497840497}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1784056545
 GameObject:
   m_ObjectHideFlags: 0
@@ -5077,6 +5082,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6710001669971673268, guid: ed41e7ee7f0dd8649ba9ce339a3a4ca0, type: 3}
+      propertyPath: maskBeam
+      value: 
+      objectReference: {fileID: 8096155730364924574, guid: 540424feb6ba74a488460146b3ef227b, type: 3}
+    - target: {fileID: 6710001669971673268, guid: ed41e7ee7f0dd8649ba9ce339a3a4ca0, type: 3}
+      propertyPath: maskCallSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 6c21e8d9fcc5c74429de8e36caffe64d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5728,7 +5741,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Mask
   maskLevel: 1
   body: {fileID: 1859604763}
-  maskColor: {r: 1, g: 0, b: 0, a: 1}
+  maskColor: {r: 0, g: 1, b: 0.027543545, a: 1}
 --- !u!1 &2068133669
 GameObject:
   m_ObjectHideFlags: 0
@@ -5831,6 +5844,34 @@ PrefabInstance:
       propertyPath: 'patrolPoints.Array.data[1]'
       value: 
       objectReference: {fileID: 800670609}
+    - target: {fileID: 6864229744497215758, guid: cca8aedef7862154280f1df2938eff1c, type: 3}
+      propertyPath: die.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6864229744497215758, guid: cca8aedef7862154280f1df2938eff1c, type: 3}
+      propertyPath: die.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6864229744497215758, guid: cca8aedef7862154280f1df2938eff1c, type: 3}
+      propertyPath: die.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1567525639}
+    - target: {fileID: 6864229744497215758, guid: cca8aedef7862154280f1df2938eff1c, type: 3}
+      propertyPath: die.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6864229744497215758, guid: cca8aedef7862154280f1df2938eff1c, type: 3}
+      propertyPath: die.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 6864229744497215758, guid: cca8aedef7862154280f1df2938eff1c, type: 3}
+      propertyPath: die.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6864229744497215758, guid: cca8aedef7862154280f1df2938eff1c, type: 3}
+      propertyPath: die.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8830080001062190603, guid: cca8aedef7862154280f1df2938eff1c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.40741
