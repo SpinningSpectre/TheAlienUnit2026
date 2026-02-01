@@ -321,6 +321,7 @@ public class PlayerController : MonoBehaviour
         if (context.started)
         {
             _isBlobbing = true;
+            GetComponent<PlayerDetection>().DropMask();
             onBlobStart?.Invoke();
         }
         

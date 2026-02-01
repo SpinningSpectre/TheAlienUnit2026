@@ -303,7 +303,7 @@ MonoBehaviour:
   startingPos: {x: 0, y: 0}
   areaGoFar: 10
   cam: {fileID: 7187008792835031165}
-  tempMomBeam: {fileID: 21300000, guid: 9acb037ecd15ce04db465c2042357d8b, type: 3}
+  tempMomBeam: {fileID: 2126285663676875739, guid: 7234f94d5f78a464880a7550e8bf4e91, type: 3}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 1024
@@ -341,6 +341,13 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   momCallSound: {fileID: 8300000, guid: ace6844e9250d7e4bae4a853f47ed584, type: 3}
+  maskBeam: {fileID: 8096155730364924574, guid: 540424feb6ba74a488460146b3ef227b, type: 3}
+  isUrMask: 0
+  maskSpeed: 6
+  maskCallSound: {fileID: 8300000, guid: ec2533a55665b5e47882b3623480bd11, type: 3}
+  ignoreTheseYouDamnRay:
+    serializedVersion: 2
+    m_Bits: 2816
 --- !u!50 &2865063649870754827
 Rigidbody2D:
   serializedVersion: 5
@@ -472,6 +479,7 @@ MonoBehaviour:
   maskMiscVisual: {fileID: 5012708723401578767}
   faceCurrentBody: {fileID: 0}
   currentMaskVoided: 0
+  maskPrefab: {fileID: 3329719987046809963, guid: fbd16692b11a3f84bb21c69e2a489b91, type: 3}
 --- !u!1 &4701051598936795738
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,13 +628,13 @@ GameObject:
   - component: {fileID: 2984681683140425607}
   - component: {fileID: 2532117483362964517}
   - component: {fileID: 124306889030508747}
-  m_Layer: 11
+  m_Layer: 8
   m_Name: Mask-Misc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2984681683140425607
 Transform:
   m_ObjectHideFlags: 0
@@ -734,13 +742,13 @@ GameObject:
   - component: {fileID: 7128699430617990185}
   - component: {fileID: 4032249328597318217}
   - component: {fileID: 2267084489242075167}
-  m_Layer: 11
+  m_Layer: 8
   m_Name: Mask-Skin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7128699430617990185
 Transform:
   m_ObjectHideFlags: 0

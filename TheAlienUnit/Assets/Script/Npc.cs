@@ -28,6 +28,8 @@ public class Npc : MonoBehaviour, IInteractable
     [Header("Mask")]
     public GameObject maskPrefab;
     public int maskLevel;
+    public Sprite maskSprite;
+    public Sprite maskSpriteLayer2;
 
     [SerializeField] private GameObject rayPoint;
     [SerializeField] private GameObject visualPoint;
@@ -124,6 +126,8 @@ public class Npc : MonoBehaviour, IInteractable
         Mask mas = Instantiate(maskPrefab, rayPoint.transform.position, visualPoint.transform.rotation).GetComponent<Mask>();
         mas.maskColor = npcColor;
         GetComponent<EnemyDetection>().enabled = false;
+        mas.GetComponent<SpriteRenderer>().sprite = maskSprite;
+        mas.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = maskSpriteLayer2;
         die?.Invoke();
     }
 
