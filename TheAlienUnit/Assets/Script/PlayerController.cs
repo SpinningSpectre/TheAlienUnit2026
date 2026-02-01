@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private InputAction _reset;
     private InputAction _move;
     private InputAction _whistle;
+    private InputAction _mom;
     
     [Header("Unity Events")]
     public UnityEvent onBlobStart;
@@ -53,23 +54,18 @@ public class PlayerController : MonoBehaviour
        _blob = InputSystem.actions.FindAction("Blob");
        _reset = InputSystem.actions.FindAction("Reset");
        _whistle = InputSystem.actions.FindAction("Whistle");
+       _mom = InputSystem.actions.FindAction("Mom");
     }
 
     // Update is called once per frame
     private void Update()
     {
-        var keyboard = Keyboard.current;
-        if (keyboard == null) return;
+        
 
-        if ((keyboard.numpadMultiplyKey.wasPressedThisFrame))
-        {
-            ChangeMomState();
-        }
-
-        if(isUrMom && keyboard.numpadEnterKey.wasPressedThisFrame)
+        /*if(isUrMom && keyboard.numpadEnterKey.wasPressedThisFrame)
         {
             StartCoroutine(MomAttack());
-        }
+        }*/
     }
     // Update is called once per frame
     private void FixedUpdate()
@@ -219,6 +215,17 @@ public class PlayerController : MonoBehaviour
                 npc.noisePos = transform.position;
             }
         }
-
+    }
+    
+    public void Mom(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            ChangeMomState();
+        
+    }
+    public void MomFire(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            StartCoroutine(MomAttack());
     }
 }
