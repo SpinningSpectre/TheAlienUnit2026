@@ -39,7 +39,7 @@ public class PlayerDetection : MonoBehaviour
         maskSkinVisual.GetComponent<SpriteRenderer>().sprite = maskSkinLevels[0];
         maskMiscVisual.GetComponent<SpriteRenderer>().sprite = maskMiscLevels[0];
         maskSkinVisual.GetComponent<SpriteRenderer>().color = maskColor;
-        SwitchDoors(true);
+        SwitchDoors(false);
     }
 
     public void DropMask()
@@ -53,7 +53,7 @@ public class PlayerDetection : MonoBehaviour
         maskMiscVisual.SetActive(false);
 
 
-        SwitchDoors(false);
+        SwitchDoors(true);
         currentMaskLevel = 0;
         faceCurrentBody = null;
     }
