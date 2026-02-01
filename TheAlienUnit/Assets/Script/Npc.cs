@@ -132,6 +132,7 @@ public class Npc : MonoBehaviour, IInteractable
         _agent.isStopped = true;
         Mask mas = Instantiate(maskPrefab, rayPoint.transform.position, visualPoint.transform.rotation).GetComponent<Mask>();
         mas.maskColor = npcColor;
+        mas.maskLevel = maskLevel;
         GetComponent<EnemyDetection>().enabled = false;
         mas.GetComponent<SpriteRenderer>().sprite = maskSprite;
         mas.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = maskSpriteLayer2;

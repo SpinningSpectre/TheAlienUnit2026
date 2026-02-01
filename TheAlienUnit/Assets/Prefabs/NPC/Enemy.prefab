@@ -412,7 +412,7 @@ PrefabInstance:
       objectReference: {fileID: 1703342738489969116, guid: e49fd6869ca34614388526ac5846c8c1, type: 3}
     - target: {fileID: 3532784556130988001, guid: 3d5eefcc7b6027440853f8eea2880544, type: 3}
       propertyPath: patrolPoints.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3532784556130988001, guid: 3d5eefcc7b6027440853f8eea2880544, type: 3}
       propertyPath: die.m_PersistentCalls.m_Calls.Array.size
@@ -540,8 +540,6 @@ MonoBehaviour:
   rayPoint: {fileID: 5352718691898523763}
   smallVisualObject: {fileID: 2856507189373911616}
   exclamSprite: {fileID: 6737790323570314763, guid: 1ba1df11695e65e41b30241570e50716, type: 3}
-  smallVisualObject: {fileID: 0}
-  exclamSprite: {fileID: 0}
 --- !u!95 &943153580002488873
 Animator:
   serializedVersion: 7

@@ -33,8 +33,8 @@ public class PlayerDetection : MonoBehaviour
         maskMiscVisual.SetActive(level != 0);
 
         if(level == 0) { return; }
-        maskSkinVisual.GetComponent<SpriteRenderer>().sprite = maskSkinLevels[level - 1];
-        maskMiscVisual.GetComponent<SpriteRenderer>().sprite = maskMiscLevels[level - 1];
+        maskSkinVisual.GetComponent<SpriteRenderer>().sprite = maskSkinLevels[0];
+        maskMiscVisual.GetComponent<SpriteRenderer>().sprite = maskMiscLevels[0];
         maskSkinVisual.GetComponent<SpriteRenderer>().color = maskColor;
         SwitchDoors(true);
     }

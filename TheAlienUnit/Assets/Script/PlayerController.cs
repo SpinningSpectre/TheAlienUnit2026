@@ -71,22 +71,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        
-
-         /*if(isUrMom && keyboard.numpadEnterKey.wasPressedThisFrame)
-         {
-             StartCoroutine(MomAttack());
-         }
-
-         if ((keyboard.numpadDivideKey.wasPressedThisFrame))
-         {
-             ChangeMaskState();
-         }
-
-         if (isUrMask && keyboard.numpad0Key.wasPressedThisFrame)
+        var keyboard = Mouse.current;
+        if (keyboard == null) return;
+        if (isUrMask && keyboard.leftButton.wasPressedThisFrame)
          {
              MaskAttack();
-         }*/
+         }
     }
     // Update is called once per frame
     private void FixedUpdate()
