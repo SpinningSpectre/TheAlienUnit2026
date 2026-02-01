@@ -149,6 +149,20 @@ public class PlayerController : MonoBehaviour
 
             return;
         }
+        _rb.linearVelocity = Vector2.zero;
+
+        _anim.SetBool("isWalking", false);
+        _anim.SetFloat("LastInputX", _moveInput.x);
+        _anim.SetFloat("LastInputY", _moveInput.y);
+
+        _maskAnim.SetBool("isWalking", false);
+        _maskAnim.SetFloat("LastInputX", _moveInput.x);
+        _maskAnim.SetFloat("LastInputY", _moveInput.y);
+
+        _miscMaskAnim.SetBool("isWalking", false);
+        _miscMaskAnim.SetFloat("LastInputX", _moveInput.x);
+        _miscMaskAnim.SetFloat("LastInputY", _moveInput.y);
+
         currentMom = Instantiate(momBeam, transform.position, transform.rotation);
         startingPos = currentMom.transform.position;
         _rb = currentMom.GetComponent<Rigidbody2D>();
@@ -157,6 +171,7 @@ public class PlayerController : MonoBehaviour
         cam.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y, -10);
         isUrMom = true;
         Soundsystem.PlaySound(momCallSound);
+        _moveInput = Vector2.zero;
         StartCoroutine(MomSwitchCooldown(true));
     }
 
