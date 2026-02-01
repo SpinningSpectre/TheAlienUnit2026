@@ -167,22 +167,6 @@ MonoBehaviour:
     m_ActionId: 852140f2-7766-474d-8707-702459ba45f3
     m_ActionName: 'Player/Interact[/Keyboard/e]'
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 27c5f898-bc57-4ee1-8800-db469aca5fe3
-    m_ActionName: 'Player/Crouch[/Keyboard/c]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f1ba0d36-48eb-4cd5-b651-1c94a6531f70
-    m_ActionName: 'Player/Jump[/Keyboard/space]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 2776c80d-3c14-4091-8c56-d04ced07a2b0
-    m_ActionName: 'Player/Previous[/Keyboard/1]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b7230bb6-fc9b-4f52-8b25-f5e19cb2c2ba
-    m_ActionName: 'Player/Next[/Keyboard/2]'
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6710001669971673268}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
@@ -286,6 +270,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 27d32130-e9a5-4799-a4af-0810ab3453ad
     m_ActionName: 'Player/Whistle[/Mouse/forwardButton,/Keyboard/r]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3edb7602-60c4-4077-a492-2d7164fef0cb
+    m_ActionName: 'Player/mom[/Keyboard/m,/Keyboard/f]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -446,7 +434,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.009408355, y: 0}
+  m_Offset: {x: 0.009408355, y: -0.11604881}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -456,7 +444,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.58603597, y: 1}
+  m_Size: {x: 0.58603597, y: 0.7679024}
   m_EdgeRadius: 0
 --- !u!95 &9067544378331457430
 Animator:
