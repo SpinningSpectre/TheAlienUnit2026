@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator _miscMaskAnim;
     private bool canMove = true;
     
-    private InputAction _attack;
     private InputAction _blob;
     private InputAction _reset;
     private InputAction _move;
@@ -47,20 +46,46 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private List<dialoge> momCallDialoge = new List<dialoge>();
     [SerializeField] private AudioClip momCallSound;
-    
+
+    [Header("Maskinator5948S")]
+    [SerializeField] private GameObject maskBeam;
+    public bool isUrMask = false;
+    [SerializeField] private float maskSpeed = 6;
+    [SerializeField] private AudioClip maskCallSound;
+    [SerializeField] private LayerMask ignoreTheseYouDamnRay;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
        _rb = GetComponent<Rigidbody2D>(); 
        _anim = GetComponent<Animator>();
        
-       _attack = InputSystem.actions.FindAction("Attack");
        _blob = InputSystem.actions.FindAction("Blob");
        _reset = InputSystem.actions.FindAction("Reset");
        _whistle = InputSystem.actions.FindAction("Whistle");
        _mom = InputSystem.actions.FindAction("Mom");
     }
-    
+
+    // Update is called once per frame
+    private void Update()
+    {
+        
+
+        /*if(isUrMom && keyboard.numpadEnterKey.wasPressedThisFrame)
+        {
+            StartCoroutine(MomAttack());
+        }
+
+        if ((keyboard.numpadDivideKey.wasPressedThisFrame))
+        {
+            ChangeMaskState();
+        }
+
+        if (isUrMask && keyboard.numpad0Key.wasPressedThisFrame)
+        {
+            MaskAttack();
+        }*/
+    }
     // Update is called once per frame
     private void FixedUpdate()
     {
@@ -72,6 +97,16 @@ public class PlayerController : MonoBehaviour
                 currentMom.transform.position.y > startingPos.y + areaGoFar)
             {
                 ChangeMomState();
+            }
+        }
+        if (isUrMask)
+        {
+            if (currentMom.transform.position.x < startingPos.x - 7 ||
+                currentMom.transform.position.x > startingPos.x + 7 ||
+                currentMom.transform.position.y < startingPos.y - 7 ||
+                currentMom.transform.position.y > startingPos.y + 7)
+            {
+                ChangeMaskState();
             }
         }
         var input = _moveInput;
@@ -88,39 +123,51 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        if (context.canceled && !isUrMom)
+        if (context.canceled && !isUrMom && !isUrMask)
         {
             _anim.SetBool("isWalking", false);
             _anim.SetFloat("LastInputX", _moveInput.x);
             _anim.SetFloat("LastInputY", _moveInput.y);
 
-            _maskAnim.SetBool("isWalking", false);
-            _maskAnim.SetFloat("LastInputX", _moveInput.x);
-            _maskAnim.SetFloat("LastInputY", _moveInput.y);
+            if (_maskAnim.transform.parent.gameObject.activeSelf)
+            {
+                _maskAnim.SetBool("isWalking", false);
+                _maskAnim.SetFloat("LastInputX", _moveInput.x);
+                _maskAnim.SetFloat("LastInputY", _moveInput.y);
+            }
 
-            _miscMaskAnim.SetBool("isWalking", false);
-            _miscMaskAnim.SetFloat("LastInputX", _moveInput.x);
-            _miscMaskAnim.SetFloat("LastInputY", _moveInput.y);
+            if (_miscMaskAnim.transform.parent.gameObject.activeSelf)
+            {
+                _miscMaskAnim.SetBool("isWalking", false);
+                _miscMaskAnim.SetFloat("LastInputX", _moveInput.x);
+                _miscMaskAnim.SetFloat("LastInputY", _moveInput.y);
+            }
         }
         _moveInput = context.ReadValue<Vector2>();
-        if (context.canceled || isUrMom) return;
+        if (context.canceled || isUrMom || isUrMask) return;
         _anim.SetBool("isWalking", true);
         _anim.SetFloat("InputX", _moveInput.x);
         _anim.SetFloat("InputY", _moveInput.y);
 
-        _maskAnim.SetBool("isWalking", true);
-        _maskAnim.SetFloat("InputX", _moveInput.x);
-        _maskAnim.SetFloat("InputY", _moveInput.y);
+        if (_maskAnim.transform.parent.gameObject.activeSelf)
+        {
+            _maskAnim.SetBool("isWalking", true);
+            _maskAnim.SetFloat("InputX", _moveInput.x);
+            _maskAnim.SetFloat("InputY", _moveInput.y);
+        }
 
-        _miscMaskAnim.SetBool("isWalking", true);
-        _miscMaskAnim.SetFloat("InputX", _moveInput.x);
-        _miscMaskAnim.SetFloat("InputY", _moveInput.y);
+        if (_miscMaskAnim.transform.parent.gameObject.activeSelf)
+        {
+            _miscMaskAnim.SetBool("isWalking", true);
+            _miscMaskAnim.SetFloat("InputX", _moveInput.x);
+            _miscMaskAnim.SetFloat("InputY", _moveInput.y);
+        }
 
     }
 
     private void ChangeMomState()
     {
-        if (hasMommed || switchCooldown) { return; }
+        if (hasMommed || switchCooldown || isUrMask) { return; }
         if (isUrMom)
         {
             _rb = GetComponent<Rigidbody2D>();
@@ -137,6 +184,26 @@ public class PlayerController : MonoBehaviour
 
             return;
         }
+        _rb.linearVelocity = Vector2.zero;
+
+        _anim.SetBool("isWalking", false);
+        _anim.SetFloat("LastInputX", _moveInput.x);
+        _anim.SetFloat("LastInputY", _moveInput.y);
+
+        if (_maskAnim.transform.parent.gameObject.activeSelf)
+        {
+            _maskAnim.SetBool("isWalking", false);
+            _maskAnim.SetFloat("LastInputX", _moveInput.x);
+            _maskAnim.SetFloat("LastInputY", _moveInput.y);
+        }
+
+        if (_miscMaskAnim.transform.parent.gameObject.activeSelf)
+        {
+            _miscMaskAnim.SetBool("isWalking", false);
+            _miscMaskAnim.SetFloat("LastInputX", _moveInput.x);
+            _miscMaskAnim.SetFloat("LastInputY", _moveInput.y);
+        }
+
         currentMom = Instantiate(momBeam, transform.position, transform.rotation);
         startingPos = currentMom.transform.position;
         _rb = currentMom.GetComponent<Rigidbody2D>();
@@ -145,7 +212,50 @@ public class PlayerController : MonoBehaviour
         cam.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y, -10);
         isUrMom = true;
         Soundsystem.PlaySound(momCallSound);
+        _moveInput = Vector2.zero;
         StartCoroutine(MomSwitchCooldown(true));
+    }
+    private void ChangeMaskState()
+    {
+        if (switchCooldown || isUrMom) { return; }
+        if (isUrMask)
+        {
+            _rb = GetComponent<Rigidbody2D>();
+            isUrMask = false;
+            cam.parent = transform;
+            cam.transform.position = transform.position;
+            cam.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y, -10);
+            Destroy(currentMom);
+            StartCoroutine(MomSwitchCooldown());
+            return;
+        }
+        _rb.linearVelocity = Vector2.zero;
+
+
+        _anim.SetBool("isWalking", false);
+        _anim.SetFloat("LastInputX", _moveInput.x);
+        _anim.SetFloat("LastInputY", _moveInput.y);
+
+        if (_maskAnim.transform.parent.gameObject.activeSelf)
+        {
+            _maskAnim.SetBool("isWalking", false);
+            _maskAnim.SetFloat("LastInputX", _moveInput.x);
+            _maskAnim.SetFloat("LastInputY", _moveInput.y);
+        }
+
+        if (_miscMaskAnim.transform.parent.gameObject.activeSelf)
+        {
+            _miscMaskAnim.SetBool("isWalking", false);
+            _miscMaskAnim.SetFloat("LastInputX", _moveInput.x);
+            _miscMaskAnim.SetFloat("LastInputY", _moveInput.y);
+        }
+
+        currentMom = Instantiate(maskBeam, transform.position, transform.rotation);
+        startingPos = currentMom.transform.position;
+        _rb = currentMom.GetComponent<Rigidbody2D>();
+        isUrMask = true;
+        _moveInput = Vector2.zero;
+        StartCoroutine(MomSwitchCooldown());
     }
 
     private IEnumerator MomSwitchCooldown(bool call = false)
@@ -176,12 +286,37 @@ public class PlayerController : MonoBehaviour
         ChangeMomState();
         hasMommed = true;
     }
+    private void MaskAttack()
+    {
+        Collider2D[] colls = Physics2D.OverlapCircleAll(currentMom.transform.position, currentMom.transform.localScale.x, enemyLayer);
+        Soundsystem.PlaySound(maskCallSound, false, true, 0.4f);
+        bool failure = false;
+        for (int i = 0; i < colls.Length; i++)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, (colls[i].transform.position - transform.position),7, ~ignoreTheseYouDamnRay);
+
+            if(hit && hit.collider.gameObject == colls[i].gameObject)
+            {
+                colls[i].transform.parent.GetComponent<Npc>().Interact();
+            }
+            if (hit)
+            {
+                print(hit.collider.gameObject.name);
+            }
+            //else { failure = true; break; }
+            //Destroy(colls[i].transform.parent.parent.gameObject);
+        }
+        if (failure) { return; }
+        canMove = true;
+        ChangeMaskState();
+    }
 
     public void Blob(InputAction.CallbackContext context)
     {
         if (context.started)
         {
             _isBlobbing = true;
+            GetComponent<PlayerDetection>().DropMask();
             onBlobStart?.Invoke();
         }
         
@@ -233,7 +368,7 @@ public class PlayerController : MonoBehaviour
     }
     public void MomFire(InputAction.CallbackContext context)
     {
-        if (context.performed & isUrMom)
+        if (context.performed)
             StartCoroutine(MomAttack());
     }
 }

@@ -10,6 +10,8 @@ public class PlayerDetection : MonoBehaviour
     public GameObject maskMiscVisual;
     public GameObject faceCurrentBody;
     public bool currentMaskVoided = false;
+
+    public GameObject maskPrefab;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -32,5 +34,19 @@ public class PlayerDetection : MonoBehaviour
         maskSkinVisual.GetComponent<SpriteRenderer>().sprite = maskSkinLevels[level - 1];
         maskMiscVisual.GetComponent<SpriteRenderer>().sprite = maskMiscLevels[level - 1];
         maskSkinVisual.GetComponent<SpriteRenderer>().color = maskColor;
+    }
+
+    public void DropMask()
+    {
+        if(currentMaskLevel == 0) return;
+        Mask mas = Instantiate(maskPrefab,transform.position,transform.rotation).GetComponent<Mask>();
+        mas.maskLevel = currentMaskLevel;
+        mas.maskColor = maskSkinVisual.GetComponent<SpriteRenderer>().color;
+        mas.body = faceCurrentBody;
+        maskSkinVisual.SetActive(false);
+        maskMiscVisual.SetActive(false);
+
+        currentMaskLevel = 0;
+        faceCurrentBody = null;
     }
 }
