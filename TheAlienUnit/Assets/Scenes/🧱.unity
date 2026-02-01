@@ -38329,7 +38329,7 @@ GameObject:
   - component: {fileID: 1615371722}
   - component: {fileID: 1615371721}
   - component: {fileID: 1615371720}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fences and Vents
   m_TagString: Untagged
   m_Icon: {fileID: 0}
