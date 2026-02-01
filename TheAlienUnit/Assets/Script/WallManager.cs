@@ -27,7 +27,7 @@ public class WallManager : MonoBehaviour
 
         visibleWalls.ClearAllTiles();
         for (int x = camBounds.min.x; x < camBounds.max.x; x++) { 
-            for (int y = Mathf.FloorToInt(camBounds.center.y); y < camBounds.max.y; y++)
+            for (int y = Mathf.FloorToInt(camBounds.center.y + 1); y < camBounds.max.y; y++)
             {
                 Vector3Int pos = new Vector3Int(x, y);
                 if (walls.GetTile(pos) == null) continue;
