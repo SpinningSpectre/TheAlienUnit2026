@@ -23,6 +23,7 @@ public class Npc : MonoBehaviour, IInteractable
     public Vector2 noisePos;
     public float searchDuration = 3f;
     private bool _isSearching = false;
+    public Color npcColor;
 
     private void Start()
     {

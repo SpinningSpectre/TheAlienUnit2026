@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private bool _isBlobbing;
     public Rigidbody2D _rb;
     private Animator _anim;
+    [SerializeField] private Animator _maskAnim;
+    [SerializeField] private Animator _miscMaskAnim;
     private bool canMove = true;
     
     private InputAction _blob;
@@ -94,20 +96,34 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        _moveInput = context.ReadValue<Vector2>();
-        _anim.SetBool("isWalking", true);
-        
-
-        if (context.canceled)
+        if (context.canceled && !isUrMom)
         {
             _anim.SetBool("isWalking", false);
             _anim.SetFloat("LastInputX", _moveInput.x);
             _anim.SetFloat("LastInputY", _moveInput.y);
+
+            _maskAnim.SetBool("isWalking", false);
+            _maskAnim.SetFloat("LastInputX", _moveInput.x);
+            _maskAnim.SetFloat("LastInputY", _moveInput.y);
+
+            _miscMaskAnim.SetBool("isWalking", false);
+            _miscMaskAnim.SetFloat("LastInputX", _moveInput.x);
+            _miscMaskAnim.SetFloat("LastInputY", _moveInput.y);
         }
-        
+        _moveInput = context.ReadValue<Vector2>();
+        if (context.canceled || isUrMom) return;
+        _anim.SetBool("isWalking", true);
         _anim.SetFloat("InputX", _moveInput.x);
         _anim.SetFloat("InputY", _moveInput.y);
-        
+
+        _maskAnim.SetBool("isWalking", true);
+        _maskAnim.SetFloat("InputX", _moveInput.x);
+        _maskAnim.SetFloat("InputY", _moveInput.y);
+
+        _miscMaskAnim.SetBool("isWalking", true);
+        _miscMaskAnim.SetFloat("InputX", _moveInput.x);
+        _miscMaskAnim.SetFloat("InputY", _moveInput.y);
+
     }
 
     private void ChangeMomState()
@@ -158,7 +174,7 @@ public class PlayerController : MonoBehaviour
         Collider2D[] colls = Physics2D.OverlapCircleAll(currentMom.transform.position, currentMom.transform.localScale.x, enemyLayer);
         for (int i = 0; i < colls.Length; i++)
         {
-            Destroy(colls[i].gameObject);
+            Destroy(colls[i].transform.parent.parent.gameObject);
         }
         canMove = false;
         yield return new WaitForSeconds(1.5f);
