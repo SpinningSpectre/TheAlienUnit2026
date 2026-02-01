@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator _miscMaskAnim;
     private bool canMove = true;
     
+    private InputAction _attack;
     private InputAction _blob;
     private InputAction _reset;
     private InputAction _move;
@@ -53,22 +54,13 @@ public class PlayerController : MonoBehaviour
        _rb = GetComponent<Rigidbody2D>(); 
        _anim = GetComponent<Animator>();
        
+       _attack = InputSystem.actions.FindAction("Attack");
        _blob = InputSystem.actions.FindAction("Blob");
        _reset = InputSystem.actions.FindAction("Reset");
        _whistle = InputSystem.actions.FindAction("Whistle");
        _mom = InputSystem.actions.FindAction("Mom");
     }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        
-
-        /*if(isUrMom && keyboard.numpadEnterKey.wasPressedThisFrame)
-        {
-            StartCoroutine(MomAttack());
-        }*/
-    }
+    
     // Update is called once per frame
     private void FixedUpdate()
     {
@@ -241,7 +233,7 @@ public class PlayerController : MonoBehaviour
     }
     public void MomFire(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed & isUrMom)
             StartCoroutine(MomAttack());
     }
 }
