@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -5,17 +6,6 @@ using UnityEngine.InputSystem;
 public class PlayerInteraction : MonoBehaviour
 {
     public List<Interactable> interactablesInArea = new List<Interactable>();
-
-    // Update is called once per frame
-    void Update()
-    {
-        var keyboard = Keyboard.current;
-        if (keyboard == null) return;
-        if (keyboard.leftMetaKey.wasPressedThisFrame)
-        {
-            Interact();
-        }
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -37,8 +27,9 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    private void Interact()
+    public void Interact()
     {
+        Debug.Log("Interact");
         for(int i = 0; i < interactablesInArea.Count; i++)
         {
             interactablesInArea[i].Interact();
