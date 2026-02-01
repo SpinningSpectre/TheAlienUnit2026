@@ -13,6 +13,9 @@ public class EnemyDetection : MonoBehaviour
     [SerializeField] private float detectionTime = 3;
     [SerializeField] private GameObject rayPoint;
     private bool _isSpotting = false;
+
+    public GameObject smallVisualObject;
+    public Sprite exclamSprite;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -42,7 +45,9 @@ public class EnemyDetection : MonoBehaviour
 
     public IEnumerator StartDetection()
     {
-        print("huh?");
+        print("Wha??");
+        if (smallVisualObject) { smallVisualObject.SetActive(true); }
+
         //do ex clam
         _isSpotting = true;
         for (int i = 0; i < 10; i++)
@@ -50,16 +55,18 @@ public class EnemyDetection : MonoBehaviour
             yield return new WaitForSeconds((detectionTime / 30) * 1.5f);
             if (!SeesPlayer())
             {
+                print("nvm");
                 _isSpotting = false;
                 yield break;
             }
         }
-        if (SeesPlayer() )
+        if (SeesPlayer())
         {
             StartCoroutine(CloseDetection());
         }
         else
         {
+            smallVisualObject.SetActive(false);
             _isSpotting = false;
         }
     }
@@ -83,7 +90,8 @@ public class EnemyDetection : MonoBehaviour
         }
         else
         {
-            _isSpotting=false;
+            smallVisualObject.SetActive(false);
+            _isSpotting =false;
         }
     }
 
@@ -96,13 +104,16 @@ public class EnemyDetection : MonoBehaviour
     {
         if (viewLevel >= PlayerDetection.Instance.currentMaskLevel || PlayerDetection.Instance.currentMaskVoided)
         {
-            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            print("in area " + gameObject.name +" also my name");
+            Vector3 forward = rayPoint.transform.TransformDirection(Vector2.up);
             Vector3 toOther = Vector3.Normalize(_player.transform.position - transform.position);
             if (Vector3.Dot(forward, toOther) > 0.3f)
             {
+                print(" in sight" + gameObject.name + " also my name");
                 RaycastHit2D hit = Physics2D.Raycast(rayPoint.transform.position, (_player.transform.position - rayPoint.transform.position), viewRange, ~memyselfandILayer);
                 if(hit && hit.collider.gameObject == _player.gameObject)
                 {
+                    print(" in vision" + gameObject.name + " also my name");
                     return true;
                 }
             }
@@ -117,12 +128,10 @@ public class EnemyDetection : MonoBehaviour
         {
             if (cols[i].gameObject.name == "Body")
             {
-                print("We have a body!");
                 Vector2 forward = rayPoint.transform.TransformDirection(Vector2.up);
                 Vector2 toOther = Vector2.Normalize(cols[i].transform.position - rayPoint.transform.position);
                 if (Vector2.Dot(forward, toOther) > 0.3f)
                 {
-                    print("In ma damn vision!");
                     RaycastHit2D hit = Physics2D.Raycast(rayPoint.transform.position, (cols[i].transform.position - rayPoint.transform.position), viewRange, ~memyselfandILayer);
                     if (hit && hit.collider.gameObject == cols[i].gameObject)
                     {
@@ -130,7 +139,6 @@ public class EnemyDetection : MonoBehaviour
                         {
                             _player.GetComponent<PlayerDetection>().currentMaskVoided = true;
                         }
-                        print("Bro lied");
                     }
                 }
             }
