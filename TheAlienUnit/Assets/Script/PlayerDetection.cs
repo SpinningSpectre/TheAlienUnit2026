@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PlayerDetection : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerDetection : MonoBehaviour
     public GameObject maskMiscVisual;
     public GameObject faceCurrentBody;
     public bool currentMaskVoided = false;
+    [SerializeField] private TilemapCollider2D[] doors;
 
     public GameObject maskPrefab;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -34,6 +36,7 @@ public class PlayerDetection : MonoBehaviour
         maskSkinVisual.GetComponent<SpriteRenderer>().sprite = maskSkinLevels[level - 1];
         maskMiscVisual.GetComponent<SpriteRenderer>().sprite = maskMiscLevels[level - 1];
         maskSkinVisual.GetComponent<SpriteRenderer>().color = maskColor;
+        SwitchDoors(true);
     }
 
     public void DropMask()
@@ -46,7 +49,16 @@ public class PlayerDetection : MonoBehaviour
         maskSkinVisual.SetActive(false);
         maskMiscVisual.SetActive(false);
 
+
+        SwitchDoors(false);
         currentMaskLevel = 0;
         faceCurrentBody = null;
+    }
+
+    public void SwitchDoors(bool enabled)
+    {
+        for (int i = 0; i < currentMaskLevel - 1; i++) {
+            doors[i].enabled = enabled;
+        }
     }
 }
