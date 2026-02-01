@@ -296,12 +296,60 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3532784556130988001, guid: 3d5eefcc7b6027440853f8eea2880544, type: 3}
+      propertyPath: rayPoint
+      value: 
+      objectReference: {fileID: 5352718691898523763}
+    - target: {fileID: 3532784556130988001, guid: 3d5eefcc7b6027440853f8eea2880544, type: 3}
       propertyPath: waitTime
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3532784556130988001, guid: 3d5eefcc7b6027440853f8eea2880544, type: 3}
+      propertyPath: maskPrefab
+      value: 
+      objectReference: {fileID: 3329719987046809963, guid: fbd16692b11a3f84bb21c69e2a489b91, type: 3}
+    - target: {fileID: 3532784556130988001, guid: 3d5eefcc7b6027440853f8eea2880544, type: 3}
+      propertyPath: maskSprite
+      value: 
+      objectReference: {fileID: 6825173860765585013, guid: 7217b9653eb9117488270e962c4bff04, type: 3}
+    - target: {fileID: 3532784556130988001, guid: 3d5eefcc7b6027440853f8eea2880544, type: 3}
+      propertyPath: visualPoint
+      value: 
+      objectReference: {fileID: 7948878404017530599}
+    - target: {fileID: 3532784556130988001, guid: 3d5eefcc7b6027440853f8eea2880544, type: 3}
+      propertyPath: maskSpriteLayer2
+      value: 
+      objectReference: {fileID: 1703342738489969116, guid: e49fd6869ca34614388526ac5846c8c1, type: 3}
+    - target: {fileID: 3532784556130988001, guid: 3d5eefcc7b6027440853f8eea2880544, type: 3}
       propertyPath: patrolPoints.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532784556130988001, guid: 3d5eefcc7b6027440853f8eea2880544, type: 3}
+      propertyPath: die.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532784556130988001, guid: 3d5eefcc7b6027440853f8eea2880544, type: 3}
+      propertyPath: die.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532784556130988001, guid: 3d5eefcc7b6027440853f8eea2880544, type: 3}
+      propertyPath: die.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2590526189479671007}
+    - target: {fileID: 3532784556130988001, guid: 3d5eefcc7b6027440853f8eea2880544, type: 3}
+      propertyPath: die.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532784556130988001, guid: 3d5eefcc7b6027440853f8eea2880544, type: 3}
+      propertyPath: die.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532784556130988001, guid: 3d5eefcc7b6027440853f8eea2880544, type: 3}
+      propertyPath: die.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532784556130988001, guid: 3d5eefcc7b6027440853f8eea2880544, type: 3}
+      propertyPath: die.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5399519987226529476, guid: 3d5eefcc7b6027440853f8eea2880544, type: 3}
       propertyPath: m_Name
@@ -388,6 +436,8 @@ MonoBehaviour:
   _player: {fileID: 0}
   detectionTime: 3
   rayPoint: {fileID: 5352718691898523763}
+  smallVisualObject: {fileID: 0}
+  exclamSprite: {fileID: 0}
 --- !u!4 &5135060507178163032 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2956395523323264439, guid: 3d5eefcc7b6027440853f8eea2880544, type: 3}
