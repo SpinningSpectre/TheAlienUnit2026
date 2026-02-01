@@ -10,6 +10,7 @@ public class Npc : MonoBehaviour, IInteractable
     public UnityEvent die;
 
     private NavMeshAgent _agent;
+    private Animator _anim;
 
     [Header("Patrol Settings")]
     public Transform[] patrolPoints;
@@ -37,6 +38,7 @@ public class Npc : MonoBehaviour, IInteractable
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
+        _anim = GetComponent<Animator>();
         isAlive = true;
 
         if (patrolPoints.Length > 0)
@@ -46,7 +48,12 @@ public class Npc : MonoBehaviour, IInteractable
     private void Update()
     {
         if (!isAlive) return;
-
+        
+        Vector3 direction = (_agent.destination - transform.position).normalized;
+        _anim.SetFloat("InputX", direction.x);
+        _anim.SetFloat("InputY", direction.y);
+        _anim.SetBool("isWalking", direction.magnitude > 0f);
+        
         if (noisePos == Vector2.zero && !_isSearching)
         {
             Patrol();
