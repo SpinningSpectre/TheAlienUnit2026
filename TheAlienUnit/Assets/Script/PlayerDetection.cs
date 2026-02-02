@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -11,6 +12,7 @@ public class PlayerDetection : MonoBehaviour
     public GameObject maskMiscVisual;
     public GameObject faceCurrentBody;
     public bool currentMaskVoided = false;
+    public TMP_Text SecurityLevelUI;
     [SerializeField] private TilemapCollider2D[] doors;
 
     public GameObject maskPrefab;
@@ -27,16 +29,17 @@ public class PlayerDetection : MonoBehaviour
 
     public void SetMask(int level, Color maskColor)
     {
+        SecurityLevelUI.text = level.ToString();
         currentMaskLevel = level;
         currentMaskVoided = false;
         maskSkinVisual.SetActive(level != 0);
         maskMiscVisual.SetActive(level != 0);
 
         if(level == 0) { return; }
-        maskSkinVisual.GetComponent<SpriteRenderer>().sprite = maskSkinLevels[level - 1];
-        maskMiscVisual.GetComponent<SpriteRenderer>().sprite = maskMiscLevels[level - 1];
+        maskSkinVisual.GetComponent<SpriteRenderer>().sprite = maskSkinLevels[0];
+        maskMiscVisual.GetComponent<SpriteRenderer>().sprite = maskMiscLevels[0];
         maskSkinVisual.GetComponent<SpriteRenderer>().color = maskColor;
-        SwitchDoors(true);
+        SwitchDoors(false);
     }
 
     public void DropMask()
@@ -50,7 +53,7 @@ public class PlayerDetection : MonoBehaviour
         maskMiscVisual.SetActive(false);
 
 
-        SwitchDoors(false);
+        SwitchDoors(true);
         currentMaskLevel = 0;
         faceCurrentBody = null;
     }

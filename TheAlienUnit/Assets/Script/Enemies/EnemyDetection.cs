@@ -110,7 +110,7 @@ public class EnemyDetection : MonoBehaviour
 
     private bool SeesPlayer()
     {
-        if (viewLevel >= PlayerDetection.Instance.currentMaskLevel || PlayerDetection.Instance.currentMaskVoided)
+        if (viewLevel - 1 >= PlayerDetection.Instance.currentMaskLevel || PlayerDetection.Instance.currentMaskVoided)
         {
             print("in area " + gameObject.name +" also my name");
             Vector3 forward = rayPoint.transform.TransformDirection(Vector2.up);

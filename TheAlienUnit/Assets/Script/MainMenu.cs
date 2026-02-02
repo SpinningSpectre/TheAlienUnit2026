@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private TMP_Text volumeText;
 
-    public void StartGame(string gameScene)
+    public void StartGame(int gameScene)
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(gameScene);
     }
