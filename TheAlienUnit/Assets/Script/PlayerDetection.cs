@@ -60,7 +60,7 @@ public class PlayerDetection : MonoBehaviour
 
     public void SwitchDoors(bool enabled)
     {
-        for (int i = 0; i < currentMaskLevel - 1; i++) {
+        for (int i = 0; i < currentMaskLevel; i++) {
             doors[i].enabled = enabled;
         }
     }

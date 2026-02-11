@@ -326,12 +326,14 @@ public class PlayerController : MonoBehaviour
             _isBlobbing = true;
             GetComponent<PlayerDetection>().DropMask();
             onBlobStart?.Invoke();
+            _anim.SetBool("IsBlobbing", true);
         }
         
         if (context.canceled)
         {
             _isBlobbing = false;
             onBlobEnd?.Invoke();
+            _anim.SetBool("IsBlobbing", false);
         }
     }
 

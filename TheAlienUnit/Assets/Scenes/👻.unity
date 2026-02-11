@@ -2110,11 +2110,11 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 16, y: -22, z: 0}
+  - first: {x: 15, y: -22, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 6
-      m_TileSpriteIndex: 6
+      m_TileIndex: 5
+      m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -2582,9 +2582,9 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: c53dd7a2f37596b4c9144a24dc610856, type: 2}
   - m_RefCount: 3
     m_Data: {fileID: 11400000, guid: 53c560ca4e6ca2b42858e37d1cbc05d7, type: 2}
-  - m_RefCount: 3
-    m_Data: {fileID: 11400000, guid: 4154d423910c9494cacfa67d1cd63dfd, type: 2}
   - m_RefCount: 4
+    m_Data: {fileID: 11400000, guid: 4154d423910c9494cacfa67d1cd63dfd, type: 2}
+  - m_RefCount: 3
     m_Data: {fileID: 11400000, guid: ad9ffc988a6728f49baadc617bd31ccb, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 20
@@ -2597,9 +2597,9 @@ Tilemap:
     m_Data: {fileID: -2031896948, guid: 2739e08a838112b499ed4232102137c2, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: 1564735283, guid: 2739e08a838112b499ed4232102137c2, type: 3}
-  - m_RefCount: 3
-    m_Data: {fileID: 1157770718, guid: 2739e08a838112b499ed4232102137c2, type: 3}
   - m_RefCount: 4
+    m_Data: {fileID: 1157770718, guid: 2739e08a838112b499ed4232102137c2, type: 3}
+  - m_RefCount: 3
     m_Data: {fileID: -689845656, guid: 2739e08a838112b499ed4232102137c2, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 48
@@ -4007,7 +4007,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &552527806
 Transform:
   m_ObjectHideFlags: 0
@@ -8026,6 +8026,198 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1374184024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1374184028}
+  - component: {fileID: 1374184027}
+  - component: {fileID: 1374184026}
+  - component: {fileID: 1374184025}
+  m_Layer: 11
+  m_Name: DialogeWithTheJammer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1374184025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374184024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 886380674d034564eb76ed61c5acbd66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogeHolder
+  Dialoge1:
+  - text: https://globalgamejam.org/games/2026/small-guy-big-plan-4
+    isEnd: 0
+    nextDiaIfNotQuestion: 1
+    voiceName: The Jammer
+    voiceImage: {fileID: 21300000, guid: 8c98fc0eafffe55429b022ee324c8715, type: 3}
+    playsSound: 0
+    clip: {fileID: 0}
+    hasQuestion: 0
+    questionAnswers: []
+    questionMoveTo: 
+    startDialogEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    endDialogEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - text: We lost :(
+    isEnd: 1
+    nextDiaIfNotQuestion: 2
+    voiceName: The Jammer
+    voiceImage: {fileID: 21300000, guid: daf0831467a0aed4e88bf1a3910041e6, type: 3}
+    playsSound: 0
+    clip: {fileID: 0}
+    hasQuestion: 0
+    questionAnswers: []
+    questionMoveTo: 
+    startDialogEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    endDialogEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - text: If you arent taking me out of here then why the FUCK did you wake me up??
+    isEnd: 1
+    nextDiaIfNotQuestion: 0
+    voiceName: Henry
+    voiceImage: {fileID: 21300000, guid: ea1fdab82181c564c94a9128c5f1a81b, type: 3}
+    playsSound: 0
+    clip: {fileID: 0}
+    hasQuestion: 0
+    questionAnswers: []
+    questionMoveTo: 
+    startDialogEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    endDialogEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1463733382}
+          m_TargetAssemblyTypeName: UnityEngine.SpriteRenderer, UnityEngine
+          m_MethodName: set_sprite
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 21300000, guid: 5a38c6e2e38af9d45b659d1efbc99df2, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1374184026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374184024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9f983dedf3e4b843a4e94f498ccc9d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1374184025}
+        m_TargetAssemblyTypeName: DialogeHolder, Assembly-CSharp
+        m_MethodName: PlayDialoge1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1374184026}
+        m_TargetAssemblyTypeName: Interactable, Assembly-CSharp
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!61 &1374184027
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374184024}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.04383135, y: -0.15374851}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 2.4249754, y: 2.4412289}
+  m_EdgeRadius: 0
+--- !u!4 &1374184028
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374184024}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.15, y: -21.02, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1374858729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9384,7 +9576,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1546640299
 Transform:
   m_ObjectHideFlags: 0
@@ -49732,7 +49924,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1969178579
 Transform:
   m_ObjectHideFlags: 0
@@ -59433,4 +59625,5 @@ SceneRoots:
   - {fileID: 21960288}
   - {fileID: 654184316}
   - {fileID: 1457171012}
+  - {fileID: 1374184028}
   - {fileID: 49046592}
