@@ -348,7 +348,7 @@ public class PlayerController : MonoBehaviour
         foreach (var col in colliders)
         {
             var interactable = col.GetComponentInParent<IInteractable>();
-            interactable?.Interact();
+            //interactable?.Interact();
         }
     }
     

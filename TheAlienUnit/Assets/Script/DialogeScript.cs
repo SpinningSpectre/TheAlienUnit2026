@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -78,6 +79,7 @@ public class DialogeScript : MonoBehaviour
         dialoge currentDia = dialoges[index];
 
         //calls the events
+
         currentDia.startDialogEvent.Invoke();
 
         //make sound play
@@ -146,11 +148,13 @@ public class DialogeScript : MonoBehaviour
 
     public void NextDia()
     {
+        print("I been called");
         if(!currentTextDialoges[currentDiaIndex].hasQuestion == false) { return; }
         KillSound();
         //continue or end dialoge
         if (!currentTextDialoges[currentDiaIndex].isEnd)
         {
+            currentTextDialoges[currentDiaIndex].endDialogEvent.Invoke();
             WriteDialoge(currentTextDialoges[currentDiaIndex].nextDiaIfNotQuestion, currentTextDialoges);
         }
         else
@@ -162,6 +166,16 @@ public class DialogeScript : MonoBehaviour
     public static void NextDial()
     {
         instance.NextDia();
+    }
+
+    public IEnumerator DoAutoDia()
+    {
+        for (int i = 0; i < currentTextDialoges.Count; i++)
+        {
+            yield return new WaitForSeconds(5);
+            NextDia();
+        }
+        yield return new WaitForSeconds(1);
     }
 }
 
